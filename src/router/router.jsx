@@ -5,6 +5,7 @@ import RootLayout from "../Layout/RootLayout";
 import Home from "../pages/Home/Home";
 import SignIn from "../SignIn/SignIn";
 import Register from "../Register/Register";
+import AddLostAndFound from "../pages/AddLostAndFound/AddLostAndFound";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register
+      },
+      {
+        path: "/lostandfound",
+        Component: AddLostAndFound
       }
     ]
   },
