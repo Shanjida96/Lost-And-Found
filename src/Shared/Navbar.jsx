@@ -3,7 +3,16 @@ import { NavLink } from "react-router";
 import { AuthContext } from "../contexts/AuthContext/AuthContext";
 
 const Navbar = () => {
-  const {user} = use(AuthContext)
+  const {user, signOutUser} = use(AuthContext)
+  const handleSignOut = () => {
+    signOutUser()
+    .then(()=>{
+      console.log('Signed Out')
+    })
+    .catch(error =>{
+      console.log(error)
+    })
+  }
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">      
@@ -21,7 +30,9 @@ const Navbar = () => {
       </div>
       <div className="navbar-end gap-10px">
        {
-        user ? <button>Sign Out</button> :
+        user ? 
+        (<NavLink className="btn" onClick={handleSignOut}>Sign Out</NavLink>) :
+        (
         <>
          <NavLink to="/register" className="btn">
           Sign Up
@@ -30,6 +41,7 @@ const Navbar = () => {
           Log In
         </NavLink>
         </>
+      )
        }
       </div>
       <div className="dropdown dropdown-end">
@@ -38,27 +50,29 @@ const Navbar = () => {
           role="button"
           className="btn btn-ghost btn-circle avatar"
         >
-          <div className="w-10 rounded-full">
+          {
+            user && 
+            <div className="w-10 rounded-full">
             <img
-              alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              alt="PFP"
+              src={user.photoURL}
             />
           </div>
+          }
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
+              <NavLink className="justify-between">
+               Add Lost And Found 
+              </NavLink>
             </li>
             <li>
-              <a>Settings</a>
+              <NavLink>Recovered Items</NavLink>
             </li>
             <li>
-              <a>Logout</a>
+              <NavLink>Manage My Items</NavLink>
             </li>
           </ul>
         </div>
