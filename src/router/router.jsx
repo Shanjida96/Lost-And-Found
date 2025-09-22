@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layout/RootLayout";
 import Home from "../pages/Home/Home";
@@ -27,7 +26,8 @@ const router = createBrowserRouter([
       {
         path: "/lostandfound",
         Component: AddLostAndFound
-      }
+      },
+
     ]
   },
 ]);
