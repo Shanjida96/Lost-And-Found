@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router";
 
 const PostCard = ({ post }) => {
-  const {postType,title, thumbnail, description ,category} = post;
+  const {_id,postType,title, thumbnail, description ,category} = post;
   return (
     <div className="card bg-base-100 w-96 shadow-lg">
       <figure>
@@ -20,7 +21,7 @@ const PostCard = ({ post }) => {
           <div className="badge badge-outline">{category}</div>
         </div>
         <div className="card-actions justify-end">
-          <button className="btn btn-secondary">View Details</button>
+         <Link to={`/items/${_id}`}> <button className="btn btn-primary">View Details</button></Link>
         </div>
       </div>
     </div>

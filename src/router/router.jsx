@@ -5,6 +5,8 @@ import Home from "../pages/Home/Home";
 import SignIn from "../SignIn/SignIn";
 import Register from "../Register/Register";
 import AddLostAndFound from "../pages/AddLostAndFound/AddLostAndFound";
+import PrivateRoute from "../routes/PrivateRoute";
+import PostDetails from "../pages/PostDetails/PostDetails";
 
 const router = createBrowserRouter([
   {
@@ -25,9 +27,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/lostandfound",
-        Component: AddLostAndFound
+        element: <PrivateRoute><AddLostAndFound></AddLostAndFound></PrivateRoute>
       },
-
+      {
+        path: '/items/:id',
+        Component: PostDetails,
+        loader: ({params})=> fetch(`http://localhost:3000/items/${params.id}`)
+      }
     ]
   },
 ]);
