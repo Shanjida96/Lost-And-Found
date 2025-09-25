@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext/AuthContext";
-import useAuth from "../../hooks/useAuth";
 import DatePicker from "react-datepicker";
 import Modal from "../Modal/Modal";
 
 const PostDetails = () => {
   const {
+    id,
     date,
     thumbnail,
     title,
@@ -53,7 +53,7 @@ const PostDetails = () => {
             </p>
           </div>
         </li>
-       <Modal post={post}></Modal>
+       <Modal post={post} id={id} ></Modal>
       </ul>
     </div>
   );

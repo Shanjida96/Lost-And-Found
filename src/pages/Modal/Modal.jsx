@@ -1,22 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import Swal from "sweetalert2";
 
-const Modal = ({ post }) => {
+const Modal = ({ post, id }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [recovered, setRecovered] = useState(false);
   const { user } = useAuth();
+
+ useEffect(()=>{
+  const retrieved = localStorage.getItem(`recovered-${id}`);
+  if(retrieved === "true"){
+    setRecovered(true)
+  }
+ },[id])
 
   const handleRecovery = (e) => {
     e.preventDefault();
     const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    data.recoveredDate = selectedDate;
+    axios.post(`http://localhost:3000/recovered/${id}`, data).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "The item is successfully recovered",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+    setRecovered(true);
+    localStorage.setItem(`recovered-${id}`,"true")
+    document.getElementById("my_modal_3").close();
   };
-
   return (
     <div>
       <button
         className="btn btn-accent m-5"
         onClick={() => document.getElementById("my_modal_3").showModal()}
+        disabled={recovered}
       >
         {post}
       </button>
@@ -57,7 +84,7 @@ const Modal = ({ post }) => {
               <p className="text-sm font-medium mb-2">Recovered By</p>
               <div className="flex items-center gap-3">
                 <img
-                  src={user?.photoURL || "https://via.placeholder.com/50"}
+                  src={user?.photoURL || ""}
                   alt="User"
                   className="w-12 h-12 rounded-full object-cover"
                 />
