@@ -7,6 +7,7 @@ import Register from "../Register/Register";
 import AddLostAndFound from "../pages/AddLostAndFound/AddLostAndFound";
 import PrivateRoute from "../routes/PrivateRoute";
 import PostDetails from "../pages/PostDetails/PostDetails";
+import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "*",
+    Component: ErrorPage
+  }
 ]);
 
 export default router;
