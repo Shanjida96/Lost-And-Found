@@ -67,10 +67,10 @@ const Navbar = () => {
             <NavLink to="/lostandfound">Add Lost And Found</NavLink>
           </li>
           <li>
-            <NavLink to="/recovered">Recovered Items</NavLink>
+            <NavLink to="/allRecovered">Recovered Items</NavLink>
           </li>
           <li>
-            <NavLink to="/manage">Manage My Items</NavLink>
+            <NavLink to="/myitems">Manage My Items</NavLink>
           </li>
         </ul>
       </div>

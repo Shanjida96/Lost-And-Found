@@ -8,6 +8,7 @@ import AddLostAndFound from "../pages/AddLostAndFound/AddLostAndFound";
 import PrivateRoute from "../routes/PrivateRoute";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import ErrorPage from "../Shared/ErrorPage/ErrorPage";
+import ManageItems from "../pages/ManageItems/ManageItems";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,17 @@ const router = createBrowserRouter([
         path: '/items/:id',
         Component: PostDetails,
         loader: ({params})=> fetch(`http://localhost:3000/items/${params.id}`)
-      }
+      }, 
+      {
+        path: '/myitems',
+        element: <PrivateRoute><ManageItems></ManageItems></PrivateRoute>
+      },
+      // {
+      //   path: '/allRecovered',
+      //   element: <PrivateRoute><AllRecovered></AllRecovered></PrivateRoute>,
+      //   // loader: fetch('')
+
+      // }
     ]
   },
   {

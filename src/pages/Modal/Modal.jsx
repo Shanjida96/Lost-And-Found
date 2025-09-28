@@ -5,17 +5,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const Modal = ({ post, id }) => {
+const Modal = ({ post, _id }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [recovered, setRecovered] = useState(false);
   const { user } = useAuth();
 
  useEffect(()=>{
-  const retrieved = localStorage.getItem(`recovered-${id}`);
+  const retrieved = localStorage.getItem(`recovered-${_id}`);
   if(retrieved === "true"){
     setRecovered(true)
   }
- },[id])
+ },[_id])
 
   const handleRecovery = (e) => {
     e.preventDefault();
@@ -23,7 +23,7 @@ const Modal = ({ post, id }) => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     data.recoveredDate = selectedDate;
-    axios.post(`http://localhost:3000/recovered/${id}`, data).then((res) => {
+    axios.post(`http://localhost:3000/recovered/${_id}`, data).then((res) => {
       if (res.data.insertedId) {
         Swal.fire({
           position: "top-end",
@@ -35,7 +35,7 @@ const Modal = ({ post, id }) => {
       }
     });
     setRecovered(true);
-    localStorage.setItem(`recovered-${id}`,"true")
+    localStorage.setItem(`recovered-${_id}`,"true")
     document.getElementById("my_modal_3").close();
   };
   return (

@@ -6,7 +6,7 @@ import Modal from "../Modal/Modal";
 
 const PostDetails = () => {
   const {
-    id,
+    _id,
     date,
     thumbnail,
     title,
@@ -53,7 +53,7 @@ const PostDetails = () => {
             </p>
           </div>
         </li>
-       <Modal post={post} id={id} ></Modal>
+       <Modal post={post} _id={_id} ></Modal>
       </ul>
     </div>
   );
