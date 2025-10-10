@@ -4,7 +4,7 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 const useRecoveryAPI = () => {
     const axiosSecure = useAxiosSecure();
     const recoveredByPromise = email => {
-        return axiosSecure.get(`/myrecovered?email=${email}`)
+        return axiosSecure.get(`/allRecovered?email=${email}`)
         .then(res=>res.data)
     }
     return (

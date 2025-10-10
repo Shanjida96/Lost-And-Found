@@ -9,6 +9,8 @@ import PrivateRoute from "../routes/PrivateRoute";
 import PostDetails from "../pages/PostDetails/PostDetails";
 import ErrorPage from "../Shared/ErrorPage/ErrorPage";
 import ManageItems from "../pages/ManageItems/ManageItems";
+import UpdateItems from "../pages/Modal/UpdateItems"
+import AllRecovered from "../pages/AllRecovered/AllRecovered";
 
 const router = createBrowserRouter([
   {
@@ -40,13 +42,18 @@ const router = createBrowserRouter([
         path: '/myitems',
         element: <PrivateRoute><ManageItems></ManageItems></PrivateRoute>
       },
+      {
+        path: '/updateitem/:id',
+        element: <PrivateRoute><UpdateItems></UpdateItems></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:3000/myitems/${params.id}`)
+      },
+      
       // {
-      //   path: '/allRecovered',
+      //   path: '/recovered',
       //   element: <PrivateRoute><AllRecovered></AllRecovered></PrivateRoute>,
-      //   // loader: fetch('')
 
       // }
-    ]
+    ] 
   },
   {
     path: "*",

@@ -1,4 +1,5 @@
 import React, { use } from 'react';
+import { NavLink } from 'react-router';
 
 const Items = ({postCreatedByPromise}) => {
     const posts = use(postCreatedByPromise)
@@ -39,8 +40,8 @@ const Items = ({postCreatedByPromise}) => {
             </td>
             <td>{post.location}</td>
             <th className='space-x-2'>
-              <button className="btn btn-primary btn-xs">Update</button>
-              <button className="btn btn-secondary btn-xs">Delete</button>
+              <NavLink to={`/updateitem/${post._id}`} className="btn btn-primary btn-xs">Update</NavLink>
+              <NavLink className="btn btn-secondary btn-xs">Delete</NavLink>
             </th>
           </tr>
        )}
